@@ -41,8 +41,8 @@ generatedCode schema = prologue <> dataRecord schema <> epilogue
 dataRecord _ = unlines [
    "data InputRecord = InputRecord {"
   , "    name :: String" -- this should customized
-  , "  , age :: Int" -- this should be customized
-  , "  , day :: DayOfWeek" -- this should be customized
+  , "  , age  :: Int"    -- this should be customized
+  , "  , day  :: String" -- this should be customized
   , "} deriving (Generic, Show)"
   ]
 
@@ -72,5 +72,5 @@ main = do
     putStrLn $ filename <> ":"
     input <- BS.readFile filename
     either putStrLn genSchema $ decode HasHeader input
-    runHaskellModule "Schema.hs" []
+    runHaskellModule "Schema.hs" ["test/example.csv"]
 
