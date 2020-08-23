@@ -12,6 +12,7 @@ import qualified Data.ByteString.Lazy.Char8 as BS
 import qualified Data.Vector as V
 import           System.Environment
 import           Language.Haskell.RunHaskellModule
+import           Data.List(intercalate)
 
 {-
 Field, Type, Parser
@@ -39,7 +40,12 @@ generatedCode :: V.Vector SchemaRecord -> String
 generatedCode schema = prologue <> dataRecord schema <> epilogue
 
 dataRecord _ = unlines [
-   "data InputRecord = InputRecord {"
+    "instance FromField DayOfWeek where"
+  , "  parseField f = case readEither (BS.unpack f) of"
+  , "                   Left errMsg -> fail errMsg"
+  , "                   Right r     -> pure r"
+
+  , "data InputRecord = InputRecord {"
   , "    name :: String" -- this should customized
   , "  , age  :: Int"    -- this should be customized
   , "  , day  :: String" -- this should be customized
@@ -51,17 +57,22 @@ prologue = unlines [
                    ,"module Parser where"
                    ,"import Data.Csv"
                    ,"import qualified Data.Vector as V"
-                   ,"import qualified Data.ByteString.Lazy.Char8 as BS"
+                   ,"import qualified Data.ByteString.Char8 as BS"
+                   ,"import qualified Data.ByteString.Lazy.Char8 as BSL"
                    ,"import GHC.Generics"
                    ,"import Control.Monad"
+                   ,"import Text.Read(readEither)"
                    ,"import Data.Time.Calendar"
                    ]
+
+joinRecordLines :: [String] -> String
+joinRecordLines = intercalate "\n    ,"
 
 epilogue = unlines [
     "instance ToRecord InputRecord where"
   , "instance FromRecord InputRecord where"
   , "main = do"
-  , "input <- BS.readFile \"test/example.csv\""
+  , "input <- BSL.readFile \"test/example.csv\""
   , "either putStrLn (V.mapM_ (print :: InputRecord -> IO ())) $ decode HasHeader input"
   ]
 
