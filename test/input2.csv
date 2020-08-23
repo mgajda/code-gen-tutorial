@@ -1,0 +1,4 @@
+Field, Type, Parser
+Name, String, id
+Age, String, id
+Date, DayOfWeek, readMaybe
