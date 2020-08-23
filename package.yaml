@@ -24,6 +24,7 @@ dependencies:
 - hspec
 - template-haskell
 - cassava
+- vector
 - bytestring
 - haskell-src-match
 - hint
