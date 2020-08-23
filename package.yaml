@@ -36,7 +36,7 @@ executables:
   ex1:
     main: app/ex1/Main.hs
   ex3:
-    main: app/ex2/Main.hs
+    main: app/ex3/Main.hs
 
 tests:
   ex2:

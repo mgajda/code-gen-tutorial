@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3b2b59cf4cb6fd320cbcd43df563ac2488feafb4eb89d5517e4902b9ef89ea26
+-- hash: d0eaec294a90920c126f23915bf5045c81b5c661689157394d702f973723266c
 
 name:           code-gen-tutori
 version:        0.1.0.0
@@ -60,7 +60,7 @@ executable ex1
   default-language: Haskell2010
 
 executable ex3
-  main-is: app/ex2/Main.hs
+  main-is: app/ex3/Main.hs
   other-modules:
       Paths_code_gen_tutori
   build-depends:
