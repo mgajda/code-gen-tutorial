@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d0eaec294a90920c126f23915bf5045c81b5c661689157394d702f973723266c
+-- hash: 7aa1af8dc28c68ba15b56c096815b7e4a6059c327e42e8e3a843f92be2820d56
 
 name:           code-gen-tutori
 version:        0.1.0.0
@@ -42,6 +42,8 @@ library
     , hspec
     , run-haskell-module
     , template-haskell
+    , time
+    , vector
   default-language: Haskell2010
 
 executable ex1
@@ -57,6 +59,8 @@ executable ex1
     , hspec
     , run-haskell-module
     , template-haskell
+    , time
+    , vector
   default-language: Haskell2010
 
 executable ex3
@@ -72,6 +76,8 @@ executable ex3
     , hspec
     , run-haskell-module
     , template-haskell
+    , time
+    , vector
   default-language: Haskell2010
 
 test-suite ex2
@@ -93,4 +99,6 @@ test-suite ex2
     , hspec
     , run-haskell-module
     , template-haskell
+    , time
+    , vector
   default-language: Haskell2010

@@ -40,24 +40,29 @@ generatedCode schema = prologue <> dataRecord schema <> epilogue
 
 dataRecord _ = unlines [
    "data InputRecord = InputRecord {"
-  , "    name :: String"
-  , "  , age :: Int"
-  , "  , day :: DayOfWeek"
+  , "    name :: String" -- this should customized
+  , "  , age :: Int" -- this should be customized
+  , "  , day :: DayOfWeek" -- this should be customized
   , "} deriving (Generic, Show)"
   ]
 
-prologue = unlines ["module Parser where"
+prologue = unlines [
+                    "{-# language DeriveGeneric #-}"
+                   ,"module Parser where"
                    ,"import Data.Csv"
+                   ,"import qualified Data.Vector as V"
                    ,"import qualified Data.ByteString.Lazy.Char8 as BS"
                    ,"import GHC.Generics"
                    ,"import Control.Monad"
+                   ,"import Data.Time.Calendar"
                    ]
 
 epilogue = unlines [
     "instance ToRecord InputRecord where"
+  , "instance FromRecord InputRecord where"
   , "main = do"
   , "input <- BS.readFile \"test/example.csv\""
-  , "either putStrLn (mapM print) $ decode HasHeader input"
+  , "either putStrLn (V.mapM_ (print :: InputRecord -> IO ())) $ decode HasHeader input"
   ]
 
 main :: IO ()

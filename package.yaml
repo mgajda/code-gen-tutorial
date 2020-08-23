@@ -29,6 +29,7 @@ dependencies:
 - haskell-src-match
 - hint
 - run-haskell-module
+- time
 
 library:
   source-dirs: src
